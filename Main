@@ -1,0 +1,103 @@
+                #include <iostream>
+
+using namespace std;
+
+#define size 4
+
+int maze[size][size] = {
+                    {1, 1, 1, 0},
+                    {1, 0, 1, 0},
+                    {0, 1, 1, 0},
+                    {1, 1, 1, 1}
+                };
+int solution[size][size];
+
+ void printMaze()
+ {
+     printf("\n\n ----------- Rat in Maze ---------------\n\n");
+ printf("original Maze \n");
+    int i, j;
+    for(i = 0; i < size; i++)
+    {
+        for(j = 0; j < size; j++)
+        {
+            cout << "\t" << maze[i][j];
+        }
+        printf("\n\n");
+    }
+ }
+ 
+ void printSolution()
+ {
+       printf("Solution Maze \n\n");
+    int k, l;
+    for(k = 0; k < size; k++)
+    {
+        for(l = 0; l < size; l++)
+        {
+             
+           cout << "\t" << solution[k][l];
+            
+        }
+        printf("\n\n");
+    }
+ }
+ 
+ int SolveMaze(int r, int c)
+ {
+    if((r == size - 1 ) && (c == size - 1))
+    {
+        solution[r][c] = 1;
+    return 1;
+    }
+    
+    
+    if(r >= 0 && c >= 0 && r < size && c < size && solution[r][c] == 0 && maze[r][c] ==1)
+    {
+        solution[r][c] = 1;
+        
+        if(SolveMaze(r + 1, c))
+        
+            return 1;
+            
+        if(SolveMaze(r, c + 1))
+        
+            return 1;
+            
+        solution[r][c] = 0;
+        
+        return 0;
+        
+    }
+    
+    return 0;
+    
+ }
+
+int main()
+{
+
+    printMaze();
+
+    int k, l;
+    for(k = 0; k < size; k++)
+    {
+        for(l = 0; l < size; l++)
+        {
+             solution[k][l] = 0;
+           
+            
+        }
+    }
+    
+    if(SolveMaze(0,0))
+    
+        printSolution();
+    
+    else
+    
+        cout << "sin solucion"<< endl;
+        return 0;
+         return 0;
+    
+}
